@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: ./web
+    ports:
+      - "80:80"
+  app:
+    build: ./app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
