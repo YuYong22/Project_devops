@@ -1,15 +1,25 @@
-version: '3'
+version: '3.8'
+
 services:
   web:
     build: ./web
     ports:
       - "80:80"
+    networks:
+      - webnet
+    depends_on:
+      - app
+
   app:
     build: ./app
     ports:
       - "8000:8000"
+    networks:
+      - webnet
+      - appnet
     depends_on:
       - db
+
   db:
     build: ./db
     environment:
@@ -19,3 +29,9 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
+    networks:
+      - appnet
+
+networks:
+  webnet:
+  appnet:

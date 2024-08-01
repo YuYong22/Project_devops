@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/YuYong22/test1.git'
+                git credentialsId: 'Github', url: 'https://github.com/YuYong22/Project_devops.git'
             }
         }
         stage('Build and Push Web Image') {
