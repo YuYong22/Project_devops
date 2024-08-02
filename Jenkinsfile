@@ -49,7 +49,7 @@ pipeline {
                // body: 'Tin tốt đây! Build cho job ${env.PROJECT_NAME} số build ${env.BUILD_NUMBER} đã thành công. Kiểm tra chi tiết tại đây ${env.BUILD_URL}.',
                 body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
                 subject: 'subjectt-success $PROJECT_NAME #$BUILD_NUMBER', 
-                to: 'phong3baox@gmail.com'
+                to: 'ndphongpc@gmail.com'
             )
         }
         failure {
@@ -58,7 +58,7 @@ pipeline {
               //  body: 'Rất tiếc, build cho job ${env.PROJECT_NAME} số build ${env.BUILD_NUMBER} đã thất bại. Kiểm tra chi tiết tại đây ${env.BUILD_URL}.',
                 body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
                 subject: 'subjectt-failed $PROJECT_NAME #$BUILD_NUMBER', 
-                to: 'phong3baox@gmail.com'
+                to: 'ndphongpc@gmail.com'
             )
         }
     }
