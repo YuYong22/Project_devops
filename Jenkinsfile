@@ -47,20 +47,18 @@ pipeline {
         success {
             emailext (
                 subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """<p>Tin tốt đây!</p>
-                        <p>Build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thành công.</p>
-                        <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>""",
-                to: "${RECIPIENTS}",
-                mimeType: 'text/html'
+                body: """Tin tốt đây!
+                        Build cho job ${env.JOB_NAME} số build ${env.BUILD_NUMBER} đã thành công.
+                        Kiểm tra chi tiết tại đây ${env.BUILD_URL}""",
+                to: "${RECIPIENTS}"
             )
         }
         failure {
             emailext (
                 subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """<p>Rất tiếc, build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thất bại.</p>
-                        <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>""",
-                to: "${RECIPIENTS}",
-                mimeType: 'text/html'
+                body: """Rất tiếc, build cho job ${env.JOB_NAME} số build ${env.BUILD_NUMBER} đã thất bại.
+                        Kiểm tra chi tiết tại đây ${env.BUILD_URL}.""",
+                to: "${RECIPIENTS}"
             )
         }
     }
