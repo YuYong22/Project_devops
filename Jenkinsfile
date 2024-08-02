@@ -43,28 +43,45 @@ pipeline {
             }
         }
     }
-    post {
+    // post {
+    //     success {
+    //         emailext (
+    //             subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+    //             body: """
+    //                 <p>Tin tốt đây!</p>
+    //                 <p>Build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thành công.</p>
+    //                 <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
+    //             """,
+    //             to: env.RECIPIENTS,
+    //             mimeType: 'text/html'
+    //         )
+    //     }
+    //     failure {
+    //         emailext (
+    //             subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+    //             body: """
+    //                 <p>Rất tiếc, build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thất bại.</p>
+    //                 <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
+    //             """,
+    //             to: env.RECIPIENTS,
+    //             mimeType: 'text/html'
+    //         )
+    //     }
+    // }
+
+     post {
         success {
             emailext (
-                subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-                    <p>Tin tốt đây!</p>
-                    <p>Build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thành công.</p>
-                    <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
-                """,
-                to: env.RECIPIENTS,
-                mimeType: 'text/html'
+                body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
+                subject: 'subjectt-success $JOB_NAME #$BUILD_NUMBER', 
+                to: 'minhtanbooming@gmail.com'
             )
         }
         failure {
             emailext (
-                subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-                    <p>Rất tiếc, build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thất bại.</p>
-                    <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
-                """,
-                to: env.RECIPIENTS,
-                mimeType: 'text/html'
+                body: 'bodyy #$BUILD_NUMBER ${env.BUILD_URL}', 
+                subject: 'subjectt-failed ${env.JOB_NAME} #${env.BUILD_NUMBER}', 
+                to: 'minhtanbooming@gmail.com'
             )
         }
     }
