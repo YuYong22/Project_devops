@@ -52,7 +52,7 @@ pipeline {
                     <p>Build cho job <b>$PROJECT_NAME</b> số build <b>$BUILD_NUMBER</b> đã thành công.</p>
                     <p>Kiểm tra chi tiết <a href="$BUILD_URL">tại đây</a>.</p>
                 """,
-                to: env.RECIPIENTS,
+                to: 'RECIPIENTS',
                 mimeType: 'text/html'
             )
         }
@@ -63,7 +63,7 @@ pipeline {
                     <p>Rất tiếc, build cho job <b>$PROJECT_NAME</b> số build <b>$BUILD_NUMBER</b> đã thất bại.</p>
                     <p>Kiểm tra chi tiết <a href="$BUILD_URL">tại đây</a>.</p>
                 """,
-                to: env.RECIPIENTS,
+                to: 'RECIPIENTS',
                 mimeType: 'text/html'
             )
         }
