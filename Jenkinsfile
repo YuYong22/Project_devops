@@ -46,24 +46,24 @@ pipeline {
     post {
         success {
             emailext (
-                subject: "$PROJECT_NAME - #$BUILD_NUMBER - SUCCESS!",
+                subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                     <p>Tin tốt đây!</p>
-                    <p>Build cho job <b>$PROJECT_NAME</b> số build <b>$BUILD_NUMBER</b> đã thành công.</p>
-                    <p>Kiểm tra chi tiết <a href="$BUILD_URL">tại đây</a>.</p>
+                    <p>Build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thành công.</p>
+                    <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
                 """,
-                to: 'RECIPIENTS',
+                to: env.RECIPIENTS,
                 mimeType: 'text/html'
             )
         }
         failure {
             emailext (
-                subject: "$PROJECT_NAME - #$BUILD_NUMBER - FAILURE!",
+                subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-                    <p>Rất tiếc, build cho job <b>$PROJECT_NAME</b> số build <b>$BUILD_NUMBER</b> đã thất bại.</p>
-                    <p>Kiểm tra chi tiết <a href="$BUILD_URL">tại đây</a>.</p>
+                    <p>Rất tiếc, build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thất bại.</p>
+                    <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
                 """,
-                to: 'RECIPIENTS',
+                to: env.RECIPIENTS,
                 mimeType: 'text/html'
             )
         }
