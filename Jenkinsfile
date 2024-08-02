@@ -67,7 +67,7 @@ pipeline {
     //         )
     //     }
     // }
-
+// cách 2
      post {
         success {
             emailext (
