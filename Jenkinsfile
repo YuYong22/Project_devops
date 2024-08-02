@@ -48,7 +48,7 @@ pipeline {
                // subject: 'Jenkins Build Successful: $PROJECT_NAME #$BUILD_NUMBER',
                // body: 'Tin tốt đây! Build cho job ${env.PROJECT_NAME} số build ${env.BUILD_NUMBER} đã thành công. Kiểm tra chi tiết tại đây ${env.BUILD_URL}.',
                 body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
-                subject: 'subjectt-success $JOB_NAME #$BUILD_NUMBER', 
+                subject: 'subjectt-success $PROJECT_NAME #$BUILD_NUMBER', 
                 to: 'phong3baox@gmail.com'
             )
         }
@@ -56,8 +56,8 @@ pipeline {
             emailext (
               //  subject: 'Jenkins Build Failed: $PROJECT_NAME #$BUILD_NUMBER',
               //  body: 'Rất tiếc, build cho job ${env.PROJECT_NAME} số build ${env.BUILD_NUMBER} đã thất bại. Kiểm tra chi tiết tại đây ${env.BUILD_URL}.',
-                body: 'bodyy #$BUILD_NUMBER ${env.BUILD_URL}', 
-                subject: 'subjectt-failed ${env.JOB_NAME} #${env.BUILD_NUMBER}', 
+                body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
+                subject: 'subjectt-failed $PROJECT_NAME #$BUILD_NUMBER', 
                 to: 'phong3baox@gmail.com'
             )
         }
