@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_CREDENTIALS_ID = 'creds-dockerhub'
+        RECIPIENTS = 'ndphongpc@gmail.com'
     }
 
     stages {
@@ -45,20 +46,25 @@ pipeline {
     post {
         success {
             emailext (
-               // subject: 'Jenkins Build Successful: $PROJECT_NAME #$BUILD_NUMBER',
-               // body: 'Tin tốt đây! Build cho job ${env.PROJECT_NAME} số build ${env.BUILD_NUMBER} đã thành công. Kiểm tra chi tiết tại đây ${env.BUILD_URL}.',
-                body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
-                subject: 'subjectt-success $PROJECT_NAME #$BUILD_NUMBER', 
-                to: 'ndphongpc@gmail.com'
+                subject: "$PROJECT_NAME - #$BUILD_NUMBER - SUCCESS!",
+                body: """
+                    <p>Tin tốt đây!</p>
+                    <p>Build cho job <b>$PROJECT_NAME</b> số build <b>$BUILD_NUMBER</b> đã thành công.</p>
+                    <p>Kiểm tra chi tiết <a href="$BUILD_URL">tại đây</a>.</p>
+                """,
+                to: env.RECIPIENTS,
+                mimeType: 'text/html'
             )
         }
         failure {
             emailext (
-              //  subject: 'Jenkins Build Failed: $PROJECT_NAME #$BUILD_NUMBER',
-              //  body: 'Rất tiếc, build cho job ${env.PROJECT_NAME} số build ${env.BUILD_NUMBER} đã thất bại. Kiểm tra chi tiết tại đây ${env.BUILD_URL}.',
-                body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
-                subject: 'subjectt-failed $PROJECT_NAME #$BUILD_NUMBER', 
-                to: 'ndphongpc@gmail.com'
+                subject: "$PROJECT_NAME - #$BUILD_NUMBER - FAILURE!",
+                body: """
+                    <p>Rất tiếc, build cho job <b>$PROJECT_NAME</b> số build <b>$BUILD_NUMBER</b> đã thất bại.</p>
+                    <p>Kiểm tra chi tiết <a href="$BUILD_URL">tại đây</a>.</p>
+                """,
+                to: env.RECIPIENTS,
+                mimeType: 'text/html'
             )
         }
     }
