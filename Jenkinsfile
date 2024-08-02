@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_CREDENTIALS_ID = 'creds-dockerhub'
+        RECIPIENTS = 'phong3baox@gmail.com'
     }
 
     stages {
@@ -42,46 +43,46 @@ pipeline {
             }
         }
     }
-    // post {
-    //     success {
-    //         emailext (
-    //             subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-    //             body: """
-    //                 <p>Tin tốt đây!</p>
-    //                 <p>Build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thành công.</p>
-    //                 <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
-    //             """,
-    //             to: env.RECIPIENTS,
-    //             mimeType: 'text/html'
-    //         )
-    //     }
-    //     failure {
-    //         emailext (
-    //             subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-    //             body: """
-    //                 <p>Rất tiếc, build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thất bại.</p>
-    //                 <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
-    //             """,
-    //             to: env.RECIPIENTS,
-    //             mimeType: 'text/html'
-    //         )
-    //     }
-    // }
-// cách 2
-     post {
+    post {
         success {
             emailext (
-                body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
-                subject: 'subjectt-success $JOB_NAME #$BUILD_NUMBER', 
-                to: 'phong3baox@gmail.com'
+                subject: "Jenkins Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    <p>Tin tốt đây!</p>
+                    <p>Build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thành công.</p>
+                    <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
+                """,
+                to: env.RECIPIENTS,
+                mimeType: 'text/html'
             )
         }
         failure {
             emailext (
-                body: 'bodyy #$BUILD_NUMBER ${env.BUILD_URL}', 
-                subject: 'subjectt-failed ${env.JOB_NAME} #${env.BUILD_NUMBER}', 
-                to: 'phong3baox@gmail.com'
+                subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    <p>Rất tiếc, build cho job <b>${env.JOB_NAME}</b> số build <b>${env.BUILD_NUMBER}</b> đã thất bại.</p>
+                    <p>Kiểm tra chi tiết <a href="${env.BUILD_URL}">tại đây</a>.</p>
+                """,
+                to: env.RECIPIENTS,
+                mimeType: 'text/html'
             )
         }
     }
+// cách 2
+    //  post {
+    //     success {
+    //         emailext (
+    //             body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
+    //             subject: 'subjectt-success $JOB_NAME #$BUILD_NUMBER', 
+    //             to: 'phong3baox@gmail.com'
+    //         )
+    //     }
+    //     failure {
+    //         emailext (
+    //             body: 'bodyy #$BUILD_NUMBER ${env.BUILD_URL}', 
+    //             subject: 'subjectt-failed ${env.JOB_NAME} #${env.BUILD_NUMBER}', 
+    //             to: 'phong3baox@gmail.com'
+    //         )
+    //     }
+    // }
 }
