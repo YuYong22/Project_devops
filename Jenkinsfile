@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKER_HUB_CREDENTIALS_ID = 'creds-dockerhub'
-        RECIPIENTS = 'ndphongpc@gmail.com'
     }
 
     stages {
@@ -74,14 +73,14 @@ pipeline {
             emailext (
                 body: 'bodyy #$BUILD_NUMBER $BUILD_URL', 
                 subject: 'subjectt-success $JOB_NAME #$BUILD_NUMBER', 
-                to: 'ndphongpc@gmail.com'
+                to: 'phong3baox@gmail.com'
             )
         }
         failure {
             emailext (
                 body: 'bodyy #$BUILD_NUMBER ${env.BUILD_URL}', 
                 subject: 'subjectt-failed ${env.JOB_NAME} #${env.BUILD_NUMBER}', 
-                to: 'ndphongpc@gmail.com'
+                to: 'phong3baox@gmail.com'
             )
         }
     }
